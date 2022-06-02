@@ -83,13 +83,25 @@ public class UserController extends HttpServlet {
 				System.out.println("로그인 성공");
 				
 				HttpSession session = request.getSession();
-				session.setAttribute("yn", "y");
+				session.setAttribute("authUser", authUser);
 			}
 			
 			//메인 리다이렉트
 			WebUtil.redirect(request, response, "/mysite2/main");
 		
+		} else if("logout".equals(action)) {
+			
+			System.out.println("usercontroller = > logout");
+			
+			//세션 지우기
+			HttpSession session = request.getSession();
+			session.removeAttribute("authUser");
+			session.invalidate();
+			
+			//메인 리다이렉트
+			WebUtil.redirect(request, response, "/mysite2/main");
 		}
+		
 		
 		
 		

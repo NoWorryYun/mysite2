@@ -98,10 +98,7 @@ public class UserDao {
 			// 3. SQL문 준비 / 바인딩 / 실행
 			String query = ""; // 쿼리문 문자열만들기, ? 주의
 			query += " select   no, ";
-			query += "  		id, ";
-			query += " 		 	password, ";
-			query += " 			name, ";
-			query += " 		 	gender ";
+			query += " 			name ";
 			query += " from users ";
 			query += " where id = ?";
 			query += " and	 password = ?";
@@ -117,12 +114,11 @@ public class UserDao {
 			// 4.결과처리
 			while(rs.next()) {
 				int no = rs.getInt("no");
-				String id = rs.getString("id");
-				String password = rs.getString("password");
 				String name = rs.getString("name");
-				String gender = rs.getString("gender");
 				
-				authUser = new UserVo(no, id, password, name, gender);
+				authUser = new UserVo();
+				authUser.setNo(no);
+				authUser.setName(name);
 			}
 			// System.out.println("[" + count + "건 추가되었습니다.]");
 
