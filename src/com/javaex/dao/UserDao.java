@@ -123,7 +123,7 @@ public class UserDao {
 				authUser = new UserVo();
 				authUser.setNo(no);
 				authUser.setId(id);
-				authUser.setId(password);
+				authUser.setPassword(password);
 				authUser.setName(name);
 			}
 			// System.out.println("[" + count + "건 추가되었습니다.]");
