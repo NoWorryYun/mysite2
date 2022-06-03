@@ -55,7 +55,8 @@ public class UserDao {
 			System.out.println("error:" + e);
 		}
 	}
-	//회원가입 --> 회원정보 저장
+
+	// 회원가입 --> 회원정보 저장
 	public int insert(UserVo userVo) {
 
 		int count = 0;
@@ -87,8 +88,8 @@ public class UserDao {
 		close();
 		return count;
 	}
-	
-	//사용자 정보 가져오기(로그인시 사용)
+
+	// 사용자 정보 가져오기(로그인시 사용, no name)
 	public UserVo getUser(UserVo userVo) {
 		UserVo authUser = null;
 		getConnection();
@@ -98,8 +99,6 @@ public class UserDao {
 			// 3. SQL문 준비 / 바인딩 / 실행
 			String query = ""; // 쿼리문 문자열만들기, ? 주의
 			query += " select   no, ";
-			query += " 			id, ";
-			query += " 			password, ";
 			query += " 			name ";
 			query += " from users ";
 			query += " where id = ?";
@@ -116,14 +115,10 @@ public class UserDao {
 			// 4.결과처리
 			while(rs.next()) {
 				int no = rs.getInt("no");
-				String id = rs.getString("id");
-				String password = rs.getString("password");
 				String name = rs.getString("name");
 				
 				authUser = new UserVo();
 				authUser.setNo(no);
-				authUser.setId(id);
-				authUser.setPassword(password);
 				authUser.setName(name);
 			}
 			// System.out.println("[" + count + "건 추가되었습니다.]");
@@ -134,36 +129,47 @@ public class UserDao {
 		close();
 		return authUser;
 	}
-	
-	public int update(UserVo userVo) {
-		int count = 0;
+
+
+	// 사용자 정보 가져오기(회원정보 수정폼, no id password name gender)
+	public UserVo getUser(int no) {
+		UserVo userVo = null;
 		getConnection();
 		
 		try {
 
 			// 3. SQL문 준비 / 바인딩 / 실행
 			String query = ""; // 쿼리문 문자열만들기, ? 주의
-			query += " update users ";
-			query += " set name = ?, ";
-			query += "     password = ?, ";
-			query += "     gender = ? ";
-			query += " where id = ? ";
+			query += " select   no, ";
+			query += " 			id, ";
+			query += " 			password, ";
+			query += " 			name, ";
+			query += " 			gender ";
+			query += " from users ";
+			query += " where no = ? ";
 
 			pstmt = conn.prepareStatement(query); // 쿼리로 만들기
 
-			pstmt.setString(1, userVo.getName()); 
-			pstmt.setString(2, userVo.getPassword());
-			pstmt.setString(3, userVo.getGender()); 
-			pstmt.setString(4, userVo.getId()); 
+			pstmt.setInt(1, no); 
 
-			count = pstmt.executeUpdate(); // 쿼리문 실행
+			rs = pstmt.executeQuery(); // 쿼리문 실행
 
+			while(rs.next()) {
+				int userno = rs.getInt("no");
+				String id = rs.getString("id");
+				String password = rs.getString("password");
+				String name = rs.getString("name");
+				String gender = rs.getString("gender");
+			
+				userVo = new UserVo(userno, id, password, name, gender);
+			}
+			
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		}
-		close();
-		return count;
 		
+		close();
+		return userVo;
 		
 	}
 	

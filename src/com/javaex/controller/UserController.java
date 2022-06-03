@@ -102,9 +102,24 @@ public class UserController extends HttpServlet {
 			WebUtil.redirect(request, response, "/mysite2/main");
 		} else if("modifyForm".equals(action)) {
 			
+			
+			//로그인 사용자의 no값을 세션에서 꺼내오기
+			HttpSession session = request.getSession();
+			UserVo authUser = (UserVo)session.getAttribute("authUser");
+			int no = authUser.getNo();
+			
+			//no로 사용자 정보 가져오기
+			UserDao userDao = new UserDao();
+			UserVo userVo = userDao.getUser(no);  //no id password name gender 정보 가져오기
+			
+			//request의 attribute에 userVo를 넣어서 forward
+			request.setAttribute("userVo", userVo);
+			
 			WebUtil.forward(request, response, "WEB-INF/views/user/modifyForm.jsp");
 			
-		} else if("modify".equals(action)) {
+			
+			
+		} /*else if("modify".equals(action)) {
 			System.out.println("usercontroller > modify");
 			//파라미터 꺼내기
 			String id = request.getParameter("id");
@@ -137,7 +152,7 @@ public class UserController extends HttpServlet {
 			
 		}
 		
-		
+		*/
 		
 		
 		
