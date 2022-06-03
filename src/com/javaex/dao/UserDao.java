@@ -99,6 +99,7 @@ public class UserDao {
 			String query = ""; // 쿼리문 문자열만들기, ? 주의
 			query += " select   no, ";
 			query += " 			id, ";
+			query += " 			password, ";
 			query += " 			name ";
 			query += " from users ";
 			query += " where id = ?";
@@ -116,11 +117,13 @@ public class UserDao {
 			while(rs.next()) {
 				int no = rs.getInt("no");
 				String id = rs.getString("id");
+				String password = rs.getString("password");
 				String name = rs.getString("name");
 				
 				authUser = new UserVo();
 				authUser.setNo(no);
 				authUser.setId(id);
+				authUser.setId(password);
 				authUser.setName(name);
 			}
 			// System.out.println("[" + count + "건 추가되었습니다.]");
