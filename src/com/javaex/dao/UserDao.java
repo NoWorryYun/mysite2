@@ -173,4 +173,34 @@ public class UserDao {
 		
 	}
 	
+	// 사용자 정보 수정하기
+	public int update(UserVo userVo) {
+		int count = -1;
+		getConnection();
+		
+		try {
+			// 3. SQL문 준비 / 바인딩 / 실행
+			String query = ""; // 쿼리문 문자열만들기, ? 주의
+			query += " update users ";
+			query += " set name = ?, ";
+			query += "     password = ?, ";
+			query += "     gender = ? ";
+			query += " where no = ? ";
+			
+			pstmt = conn.prepareStatement(query); // 쿼리로 만들기
+			pstmt.setString(1, userVo.getName()); 
+			pstmt.setString(2, userVo.getPassword());
+			pstmt.setString(3, userVo.getGender()); 
+			pstmt.setInt(4, userVo.getNo()); 
+			
+			count = pstmt.executeUpdate(); // 쿼리문 실행
+			System.out.println(count  +  "건이 수정되었습니다.");
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		close();
+		return count;
+		
+		
+	}
 }

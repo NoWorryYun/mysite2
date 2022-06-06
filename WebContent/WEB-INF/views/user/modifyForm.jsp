@@ -46,7 +46,7 @@
 		<div id="nav">
 			<ul class="clearfix">
 				<li><a href="">입사지원서</a></li>
-				<li><a href="">게시판</a></li>
+				<li><a href="/mysite2/guestbook?action=addList">게시판</a></li>
 				<li><a href="">갤러리</a></li>
 				<li><a href="">방명록</a></li>
 			</ul>
@@ -81,12 +81,13 @@
 	
 				<div id="user">
 					<div id="modifyForm">
-						<form action="" method="get">
-	
+						<form action="/mysite2/user" method="get">
+							<input type="hidden" name="action" value="modify">
 							<!-- 아이디 -->
 							<div class="form-group">
 								<label class="form-text" for="input-uid">아이디</label> 
 								<span class="text-large bold"><%=userVo.getId() %></span>
+								<input type="hidden" name="id" value="<%=userVo.getId() %>">
 							</div>
 	
 							<!-- 비밀번호 -->
