@@ -3,11 +3,9 @@
 <%@ page import="com.javaex.vo.GuestbookVo"%>
 <%@ page import="com.javaex.vo.UserVo"%>
 <%@ page import="java.util.List"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 
-	UserVo authUser = (UserVo)session.getAttribute("authUser");
-	GuestbookDao guestbookDao = new GuestbookDao();
 	List<GuestbookVo> guestList = (List<GuestbookVo>)request.getAttribute("gList");
 	
 %>
@@ -27,9 +25,9 @@
 <body>
 	<div id="wrap">
 
-		<!-- header -->
-		<jsp:include page="/WEB-INF/views/includes/header.jsp"></jsp:include>
-		<!-- //header -->
+		<!-- c:import header -->
+		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
+		<!-- /c:import header -->
 
 		<div id="nav">
 			<ul class="clearfix">
@@ -95,25 +93,25 @@
 						<input type="hidden" name="action" value="add">
 						
 					</form>	
-					<%for(int i = 0 ; i < guestList.size(); i++){%>
-					<table class="guestRead">
-						<colgroup>
-							<col style="width: 10%;">
-							<col style="width: 40%;">
-							<col style="width: 40%;">
-							<col style="width: 10%;">
-						</colgroup>
-						<tr>
-							<td><%= guestList.get(i).getNo() %></td>
-							<td><%= guestList.get(i).getName() %></td>
-							<td><%= guestList.get(i).getRegDate() %></td>
-							<td><a href="/mysite2/guestbook?action=deleteForm&no=<%=guestList.get(i).getNo()%>">삭제</a></td>
-						</tr>
-						<tr>
-							<td colspan=4 class="text-left"><%= guestList.get(i).getContent() %></td>
-						</tr>
-					</table>
-					<%}%>
+					<c:forEach items="${requestScope.gList}" var="guestbookVo" varStatus="status">
+						<table class="guestRead">
+							<colgroup>
+								<col style="width: 10%;">
+								<col style="width: 40%;">
+								<col style="width: 40%;">
+								<col style="width: 10%;">
+							</colgroup>
+							<tr>
+								<td>${guestbookVo.no}</td>
+								<td>${guestbookVo.name}</td>
+								<td>${guestbookVo.regDate}</td>
+								<td><a href="/mysite2/guestbook?action=deleteForm&no=${guestbookVo.no}">삭제</a></td>
+							</tr>
+							<tr>
+								<td colspan=4 class="text-left">${guestbookVo.content}</td>
+							</tr>
+						</table>
+					</c:forEach>
 					<!-- //guestRead -->
 					
 				</div>
@@ -124,9 +122,9 @@
 		</div>
 		<!-- //container  -->
 
-		<!-- footer -->
-		<jsp:include page="/WEB-INF/views/includes/footer.jsp"></jsp:include>
-		<!-- //footer -->
+		<!-- c:import footer -->
+		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
+		<!-- /c:import footer -->
 	</div>
 	<!-- //wrap -->
 

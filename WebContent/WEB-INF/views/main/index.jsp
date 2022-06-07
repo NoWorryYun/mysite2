@@ -65,9 +65,9 @@
 		</div>
 		<!-- //container -->
 
-		<!-- footer -->
-		<jsp:include page="/WEB-INF/views/includes/footer.jsp"></jsp:include>
-		<!-- //footer -->
+		<!-- c:import footer -->
+		<c:import url="/WEB-INF/views/includes/footer.jsp"></c:import>
+		<!-- /c:import footer -->
 
 	</div>
 	<!-- //wrap -->
