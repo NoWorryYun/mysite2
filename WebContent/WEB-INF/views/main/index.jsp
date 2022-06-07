@@ -1,48 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ page import="com.javaex.vo.UserVo" %>
-<%
-
-	UserVo authUser = (UserVo)session.getAttribute("authUser");
-	System.out.println(authUser);	
-
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/mysite2/assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="/mysite2/assets/css/main.css" rel="stylesheet" type="text/css">
+<link href="/mysite2/assets/css/mysite.css" rel="stylesheet"
+	type="text/css">
+<link href="/mysite2/assets/css/main.css" rel="stylesheet"
+	type="text/css">
 
 </head>
 
 <body>
 	<div id="wrap">
-
-		<div id="header" class="clearfix">
-			<h1>
-				<a href="/mysite2/main">MySite</a>
-			</h1>
-			
-			<%if(authUser == null){%>	<!--로그인 실행-->
-				<!--로그인 실패-->
-				<ul>
-					<li><a href="/mysite2/user?action=loginForm" class="btn_s">로그인</a></li>
-					<li><a href="/mysite2/user?action=joinForm" class="btn_s">회원가입</a></li>
-				</ul>
-			<%} else{ %>
-				<!-- 로그인 성공 -->
-				<ul>
-				<li><%=authUser.getName()%> 님 안녕하세요^^</li>
-				<li><a href="/mysite2/user?action=logout" class="btn_s">로그아웃</a></li>
-				<li><a href="/mysite2/user?action=modifyForm" class="btn_s">회원정보수정</a></li>
-			</ul>
-			<%}%>
-			
-		</div>
-		<!-- //header -->
-
+		<!-- c:import header -->
+		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
+		<!-- /c:import header -->
+		
+		
 		<div id="nav">
 			<ul class="clearfix">
 				<li><a href="">입사지원서</a></li>
@@ -53,53 +30,43 @@
 		</div>
 		<!-- //nav -->
 
-		
+
 		<div id="container" class="clearfix">
 			<!-- aside 없음 -->
 			<div id="full-content">
-			
+
 				<!-- content-head 없음 -->
-				<div id="index"> 
-				
+				<div id="index">
+
 					<img id="profile-img" src="/mysite2/assets/image/profile.jpg">
-					
+
 					<div id="greetings">
 						<p class="text-xlarge">
-							<span class="bold">안녕하세요!!<br>
-							윤성한의 MySite에 오신 것을 환영합니다.<br>
-							<br>
-							이 사이트는 웹 프로그램밍 실습과제 예제 사이트입니다.<br>
-							</span>
-							<br>
-							사이트 소개, 회원가입, 방명록, 게시판으로 구성되어 있으며<br>
-							jsp&serlvet(모델2) 방식으로 제작되었습니다.<br>
-							<br>
-							자바 수업 + 데이터베이스 수업 + 웹프로그래밍 수업<br>
-							배운 거 있는거 없는 거 다 합쳐서 만들어 놓은 사이트 입니다.<br>
-							<br>
-							(자유롭게 꾸며보세요!!)<br>
-							<br><br>
-							<a class="" href="">[방명록에 글 남기기]</a>
-						</p>	
+							<span class="bold">안녕하세요!!<br> 윤성한의 MySite에 오신 것을
+								환영합니다.<br> <br> 이 사이트는 웹 프로그램밍 실습과제 예제 사이트입니다.<br>
+							</span> <br> 사이트 소개, 회원가입, 방명록, 게시판으로 구성되어 있으며<br>
+							jsp&serlvet(모델2) 방식으로 제작되었습니다.<br> <br> 자바 수업 + 데이터베이스
+							수업 + 웹프로그래밍 수업<br> 배운 거 있는거 없는 거 다 합쳐서 만들어 놓은 사이트 입니다.<br>
+							<br> (자유롭게 꾸며보세요!!)<br> <br> <br> <a class=""
+								href="">[방명록에 글 남기기]</a>
+						</p>
 					</div>
 					<!-- //greetings -->
-					
+
 					<div class="clear"></div>
-					
+
 				</div>
 				<!-- //index -->
-				
+
 			</div>
 			<!-- //full-content -->
-			
+
 
 		</div>
 		<!-- //container -->
-		
-		
-		<div id="footer">
-			Copyright ⓒ 2022 윤성한. All right reserved
-		</div>
+
+		<!-- footer -->
+		<jsp:include page="/WEB-INF/views/includes/footer.jsp"></jsp:include>
 		<!-- //footer -->
 
 	</div>
