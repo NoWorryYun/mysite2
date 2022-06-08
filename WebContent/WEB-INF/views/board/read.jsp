@@ -21,7 +21,7 @@
 		<div id="nav">
 			<ul class="clearfix">
 				<li><a href="">입사지원서</a></li>
-				<li><a href="/mysite2/board?action=board">게시판</a></li>
+				<li><a href="/mysite2/board?action=list">게시판</a></li>
 				<li><a href="">갤러리</a></li>
 				<li><a href="/mysite2/guestbook?action=addList">방명록</a></li>
 			</ul>
@@ -32,7 +32,7 @@
 			<div id="aside">
 				<h2>게시판</h2>
 				<ul>
-					<li><a href="/mysite2/board?action=board">일반게시판</a></li>
+					<li><a href="/mysite2/board?action=list">일반게시판</a></li>
 					<li><a href="">댓글게시판</a></li>
 				</ul>
 			</div>
@@ -86,9 +86,11 @@
 									${boardVo.content }
 								</span>
 							</div>
-							
-							<a id="btn_modify" href="">수정</a>
+							<c:if test="${sessionScope.authUser.no == boardVo.userNo}">
+							<a id="btn_modify" href="/mysite2/board?action=modifyForm&no=${boardVo.no}">수정</a>
+							</c:if>
 							<a id="btn_modify" href="">목록</a>
+							
 							
 						</form>
 						<!-- //form -->

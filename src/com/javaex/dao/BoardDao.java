@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.javaex.vo.BoardVo;
-import com.javaex.vo.GuestbookVo;
 
 public class BoardDao {
 	private Connection conn = null;
@@ -178,7 +177,7 @@ public class BoardDao {
 		close();
 		return boardVo;
 	}
-	
+	//쓰기
 	public int writeBoard(BoardVo boardVo) {
 
 		int count = 0;
@@ -204,6 +203,52 @@ public class BoardDao {
 			// 4.결과처리
 			// System.out.println("[" + count + "건 추가되었습니다.]");
 
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		close();
+		return count;
+	}
+	public int updateBoard(BoardVo boardVo) {
+		int count = -1;
+		getConnection();
+		
+		try {
+			// 3. SQL문 준비 / 바인딩 / 실행
+			String query = ""; // 쿼리문 문자열만들기, ? 주의
+			query += " update board ";
+			query += " set title = ?, ";
+			query += "     content = ? ";
+			query += " where no = ? ";
+			
+			pstmt = conn.prepareStatement(query); // 쿼리로 만들기
+			pstmt.setString(1, boardVo.getTitle()); 
+			pstmt.setString(2, boardVo.getContent());
+			pstmt.setInt(3, boardVo.getNo()); 
+			
+			count = pstmt.executeUpdate(); // 쿼리문 실행
+			System.out.println(count  +  "건이 수정되었습니다.");
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		close();
+		return count;
+	}
+	public int hitCount(BoardVo boardVo) {
+		int count = -1;
+		getConnection();
+		
+		try {
+			String query = ""; // 쿼리문 문자열만들기, ? 주의
+			query += " update board ";
+			query += " set hit = hit + 1 ";
+			query += " where no = ? ";
+			
+			pstmt = conn.prepareStatement(query); // 쿼리로 만들기
+			pstmt.setInt(1, boardVo.getNo()); 
+			
+			count = pstmt.executeUpdate(); // 쿼리문 실행
+			
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		}

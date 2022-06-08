@@ -32,7 +32,7 @@
 			<div id="aside">
 				<h2>게시판</h2>
 				<ul>
-					<li><a href="">일반게시판</a></li>
+					<li><a href="/mysite2/board?action=list">일반게시판</a></li>
 					<li><a href="">댓글게시판</a></li>
 				</ul>
 			</div>
@@ -70,7 +70,7 @@
 								<textarea id="txt-content" name="content"></textarea>
 							</div>
 							
-							<a id="btn_cancel" href="/mysite2/WEB-INF/views/board?action=list.jsp">취소</a>
+							<a id="btn_cancel" href="/mysite2/board?action=list">취소</a>
 							<button id="btn_add" type="submit" >등록</button>
 							
 						</form>
