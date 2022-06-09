@@ -137,7 +137,7 @@ public class BoardController extends HttpServlet {
 			
 			//searchBoard 만들기
 			BoardDao boardDao = new BoardDao();
-			List<BoardVo> boardList = boardDao.searchBoard(pot);
+			List<BoardVo> boardList = boardDao.getBoard(pot);
 			System.out.println("검색어" + pot + "이/가 포함된 title을 검색");
 			
 			//request에 데이터 추가

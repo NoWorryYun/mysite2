@@ -55,6 +55,7 @@ public class BoardDao {
 			System.out.println("error:" + e);
 		}
 	}
+	/*
 	//리스트
 	public List<BoardVo> getBoard(){
 		List<BoardVo> boardList = new ArrayList<BoardVo>();
@@ -103,6 +104,7 @@ public class BoardDao {
 		close();
 		return boardList;
 	}
+	*/
 	//삭제
 	public int deleteBoard(int no) {
 		int count = 0;
@@ -255,8 +257,13 @@ public class BoardDao {
 		close();
 		return count;
 	}
+	//리스트
+	public List<BoardVo> getBoard(){
+		return getBoard("");
+	}
+	
 	//검색
-	public List<BoardVo> searchBoard(String pot){
+	public List<BoardVo> getBoard(String pot){
 		List<BoardVo> boardList = new ArrayList<BoardVo>();
 
 		getConnection();
