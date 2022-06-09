@@ -25,7 +25,10 @@ public class MainController extends HttpServlet {
 		//코드
 		WebUtil.forward(request, response, "/WEB-INF/views/main/index.jsp");
 	
-	
+
+		//한글깨짐 방지
+		request.setCharacterEncoding("UTF-8");
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

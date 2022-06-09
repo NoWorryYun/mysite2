@@ -21,6 +21,9 @@ public class BoardController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("BoardController");
 		
+		//한글깨짐 방지
+		request.setCharacterEncoding("UTF-8");
+		
 		String action = request.getParameter("action");
 		System.out.println(action);
 		

@@ -28,6 +28,9 @@ public class GuestController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		//한글깨짐 방지
+		request.setCharacterEncoding("UTF-8");
+		
 		// 코드작성
 		System.out.println("guestbookcontroller");
 

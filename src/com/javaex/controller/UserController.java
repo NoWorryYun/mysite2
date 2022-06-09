@@ -26,6 +26,11 @@ public class UserController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		//한글깨짐 방지
+		request.setCharacterEncoding("UTF-8");
+		
+		
 		// action을 꺼낸다
 		String action = request.getParameter("action");
 

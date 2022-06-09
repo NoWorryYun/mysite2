@@ -22,14 +22,7 @@
 		<!-- /c:import header -->
 		<!-- //header -->
 
-		<div id="nav">
-			<ul class="clearfix">
-				<li><a href="">입사지원서</a></li>
-				<li><a href="/mysite2/board?action=list">게시판</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="/mysite2/guestbook?action=addList">방명록</a></li>
-			</ul>
-		</div>
+		<c:import url="/WEB-INF/views/includes/nav.jsp"></c:import>
 		<!-- //nav -->
 
 		<div id="container" class="clearfix">
@@ -117,8 +110,9 @@
 
 							<div class="clear"></div>
 						</div>
-						<a id="btn_write" href="/mysite2/board?action=writeForm">글쓰기</a>
-
+						<c:if test="${sessionScope.authUser.no != null}">
+							<a id="btn_write" href="/mysite2/board?action=writeForm">글쓰기</a>
+						</c:if>
 					</div>
 					<!-- //list -->
 				</div>
