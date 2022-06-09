@@ -55,6 +55,8 @@ public class BoardController extends HttpServlet {
 			boardDao.hitCount(boardVo);
 			System.out.println(boardVo.getNo()+"번 게시글 조회수+1");
 			//request에 데이터 추가
+			
+			boardVo = boardDao.readBoard(no);
 			request.setAttribute("boardVo", boardVo);
 			
 			//forward
