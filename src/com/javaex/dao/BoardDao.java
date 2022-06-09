@@ -255,5 +255,51 @@ public class BoardDao {
 		close();
 		return count;
 	}
+	//검색
+	public List<BoardVo> searchBoard(String pot){
+		List<BoardVo> boardList = new ArrayList<BoardVo>();
+
+		getConnection();
+
+		try {
+			// SQL 문 준비
+			String query = "";
+			query += " select  b.no no, ";
+			query += "         b.title title, ";
+			query += "         b.content content, ";
+			query += "         b.hit hit, ";
+			query += "         b.reg_date regDate, ";
+			query += "         b.user_no userNo, ";
+			query += "         u.name name ";
+			query += " from board b, users u ";
+			query += " where b.user_no = u.no ";
+			query += " and b.title like '%"+pot+"%' ";
+			query += " order by no desc ";
+
+			// 바인딩
+			pstmt = conn.prepareStatement(query);
+
+			rs = pstmt.executeQuery(); // 쿼리문 실행
+			// 4.결과처리
+			// 리스트로 만들기
+
+			while (rs.next()) {
+				int no = rs.getInt("no");
+				String title = rs.getString("title");
+				String content = rs.getString("content");
+				String name = rs.getString("name");
+				int hit = rs.getInt("hit");
+				String regDate = rs.getString("regDate");
+				int userNo = rs.getInt("userNo");
+
+				BoardVo boardVo = new BoardVo(no, title, content, hit, regDate, userNo, name);
+				boardList.add(boardVo);
+			}
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		close();
+		return boardList;
+	}
 }
 

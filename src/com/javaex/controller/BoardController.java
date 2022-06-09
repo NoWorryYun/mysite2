@@ -132,6 +132,19 @@ public class BoardController extends HttpServlet {
 			
 			//redirect
 			WebUtil.redirect(request, response, "/mysite2/board?action=list");
+		} else if("search".equals(action)) {
+			String pot = request.getParameter("pot");
+			
+			//searchBoard 만들기
+			BoardDao boardDao = new BoardDao();
+			List<BoardVo> boardList = boardDao.searchBoard(pot);
+			System.out.println("검색어" + pot + "이/가 포함된 title을 검색");
+			
+			//request에 데이터 추가
+			request.setAttribute("bList", boardList);
+			
+			//Forward
+			WebUtil.forward(request, response, "/WEB-INF/views/board/list.jsp");
 		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
