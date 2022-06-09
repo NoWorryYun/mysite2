@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.javaex.dao.BoardDao;
-import com.javaex.dao.GuestbookDao;
 import com.javaex.util.WebUtil;
 import com.javaex.vo.BoardVo;
 
@@ -32,11 +31,22 @@ public class BoardController extends HttpServlet {
 			
 			//boardList 만들기
 			BoardDao boardDao = new BoardDao();
-			List<BoardVo> boardList = boardDao.getBoard();
-			System.out.println(boardList);
 			
-			//request에 데이터 추가
-			request.setAttribute("bList", boardList);
+			String title = request.getParameter("pot");
+			
+			//타이틀이 있을때
+			if( title != null) {
+				List<BoardVo> boardList = boardDao.getBoard(title);
+				System.out.println(boardList);
+				//request에 데이터 추가
+				request.setAttribute("bList", boardList);
+			//타이틀이 없을때
+			} else {
+				List<BoardVo> boardList = boardDao.getBoard();
+				System.out.println(boardList);
+				//request에 데이터 추가
+				request.setAttribute("bList", boardList);
+			}
 			
 			//Forward
 			WebUtil.forward(request, response, "/WEB-INF/views/board/list.jsp");
@@ -137,7 +147,9 @@ public class BoardController extends HttpServlet {
 			
 			//redirect
 			WebUtil.redirect(request, response, "/mysite2/board?action=list");
-		} else if("search".equals(action)) {
+		} 
+		/*
+		else if("search".equals(action)) {
 			String pot = request.getParameter("pot");
 			
 			//searchBoard 만들기
@@ -151,6 +163,7 @@ public class BoardController extends HttpServlet {
 			//Forward
 			WebUtil.forward(request, response, "/WEB-INF/views/board/list.jsp");
 		}
+		*/
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
